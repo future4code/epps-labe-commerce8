@@ -1,26 +1,81 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Filter from './Components/Filter/Filter'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    productsList: [
+      {
+        id: 1,
+        name: "Qualquer um",
+        value: 100,
+        imageUrl: '',
+      },
+      {
+        id: 2,
+        name: "Qualquer um",
+        value: 100,
+        imageUrl: "",
+      },
+      {
+        id: 3,
+        name: "Qualquer um",
+        value: 100,
+        imageUrl: "",
+      },
+      {
+        id: 4,
+        name: "Qualquer um",
+        value: 100,
+        imageUrl: "",
+      },
+      {
+        id: 5,
+        name: "Qualquer um",
+        value: 100,
+        imageUrl: "",
+      },
+      {
+        id: 6,
+        name: "Qualquer um",
+        value: 100,
+        imageUrl: "",
+      },
+      {
+        id: 7,
+        name: "Qualquer um",
+        value: 100,
+        imageUrl: "",
+      },
+      {
+        id: 8,
+        name: "Qualquer um",
+        value: 100,
+        imageUrl: "",
+      },
+    ],
+  };
+
+  componentDidMount () {
+
+  }
+
+  componentDidUpdate() {
+
+  }
+
+  onChangeFilter () {
+  
+  }
+
+  render () {
+    return (
+      <div>
+        <Filter />
+      </div>
+    )
+  }
+
+
 }
 
 export default App;
