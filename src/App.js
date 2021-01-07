@@ -40,9 +40,9 @@ export class App extends React.Component {
       (product) => product.id === newProduct.id
     );
     if (productShow > -1) {
-      list[productShow].quantidade++;
+      list[productShow].quantity++;
     } else {
-      newProduct.quantidade = 1;
+      newProduct.quantity = 1;
       list.push(newProduct);
     }
     this.setState({ cartList: list });

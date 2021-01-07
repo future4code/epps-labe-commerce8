@@ -12,9 +12,9 @@ export class Cart extends React.Component {
         <div>
           <img src={product.imageUrl} />
           <p>{product.name}</p>
-          <p>{product.value}</p>
-          <p>{product.quantity}</p>
-          <p>{product.value * product.quantity}</p>
+          <p>R${product.value}</p>
+          <p>Quantidade:{product.quantity}</p>
+          <p>R${product.value * product.quantity}</p>
           <button onClick ={() => this.props.delete(product.id)}>Retirar produto do carrinho</button>
         </div>
       );
@@ -27,6 +27,7 @@ export class Cart extends React.Component {
     for (let i = 0; i < list.length; i++) {
       value += list[i].value * list[i].quantity;
     }
+    return value
   };
 
   render() {
@@ -37,7 +38,7 @@ export class Cart extends React.Component {
       <div>
         <h2>Carrinho</h2>
         <CartContainer lines={cartList.length}>{cartList}</CartContainer>
-        <h2>Valor Total: {totalValue}</h2>
+        <h2>Valor Total: R$ {totalValue}</h2>
       </div>
     );
   }

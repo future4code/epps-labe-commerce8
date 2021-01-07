@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Image = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
 `;
 
 const ProductsContainer = styled.div``;
