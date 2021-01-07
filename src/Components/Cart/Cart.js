@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const CartContainer = styled.div`
   width: 900px;
-  padding: 10px;
 `;
 
 export class Cart extends React.Component {
@@ -16,7 +15,7 @@ export class Cart extends React.Component {
           <p>{product.value}</p>
           <p>{product.quantity}</p>
           <p>{product.value * product.quantity}</p>
-          <button>Retirar produto do carrinho</button>
+          <button onClick ={() => this.props.delete(product.id)}>Retirar produto do carrinho</button>
         </div>
       );
     });

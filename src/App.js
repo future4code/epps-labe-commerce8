@@ -25,32 +25,43 @@ const CartButton = styled.div`
   background-position: center;
 `;
 
+const DivApp = styled.div``
+
 export class App extends React.Component {
   state = {
     section: "",
     viewCart: false,
     cartList: [],
-    cart: false,
   };
 
-  productAddCart = (newProduct)=> {
+  productAddCart = (newProduct) => {
     let list = [...this.state.cartList];
-    let productShow = this.state.cartList.findIndex((product) => product.id === newProduct.id);
+    let productShow = this.state.cartList.findIndex(
+      (product) => product.id === newProduct.id
+    );
     if (productShow > -1) {
       list[productShow].quantidade++;
     } else {
-      newProduct.quantidade=1;
+      newProduct.quantidade = 1;
       list.push(newProduct);
     }
-    this.setState({cartList: list})
+    this.setState({ cartList: list });
+  };
+
+  deleteProduct = (id) => {
+    let list = [...this.state.cartList];
+    let product = this.state.cartList.findIndex (
+      (product) => product.id === id);
+      list.splice(product, 1);
+      this.setState({cartList: list})  
   }
 
   receiveSection = (sectionPress) => {
     this.setState({ section: sectionPress });
-    if (sectionPress === "cart") {
-      this.setState({ cart: true });
+    if (sectionPress === "viewCart") {
+      this.setState({ viewCart: true });
     } else {
-      this.setState({ cart: false });
+      this.setState({ viewCart: false });
     }
   };
 
@@ -66,19 +77,24 @@ export class App extends React.Component {
             state={this.state.section}
             info={this.receiveSection}
           ></Header>
-          <Cart list={this.state.cartList} />
+          <Cart list={this.state.cartList} delete={this.deleteProduct} />
         </div>
       );
     }
+
+    
     return (
-      <div>
+      <DivApp>
         <Header state={this.state.section} info={this.receiveSection}>
           <h1>LabECommerce</h1>
         </Header>
         <Filter></Filter>
-        <SectionProducts section={this.state.section} passProduct={this.productAddCart} />
+        <SectionProducts
+          section={this.state.section}
+          passProduct={this.productAddCart}
+        />
         <CartButton onClick={this.onClickCart} />
-      </div>
+      </DivApp>
     );
   }
 }
