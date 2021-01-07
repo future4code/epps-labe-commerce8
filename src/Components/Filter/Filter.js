@@ -2,13 +2,18 @@ import React from 'react';
 import styled from 'styled-components'
 
 const BigContainer = styled.div`
-
+    height: 10vh;
+    display: flex;
+    align-items: center;
 `
 
 const FilterContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
-class Filter extends React.Component {
+export class Filter extends React.Component {
     state = {
         minValue : '',
         maxValue : '',
@@ -31,7 +36,6 @@ class Filter extends React.Component {
     render () {
         return (
             <BigContainer>
-                <h1>Filtros</h1>
                 <FilterContainer>
                     <label>Valor Mínimo</label>
                     <input type={'number'} value={this.state.minValue} onChange={this.onChangeMinValue}></input>

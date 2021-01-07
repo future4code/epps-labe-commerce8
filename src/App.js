@@ -1,81 +1,86 @@
 import React from "react";
-import Filter from './Components/Filter/Filter'
+import Filter from "./Components/Filter/Filter";
+import SectionProducts from "./Components/Card/SectionProducts";
+import Cart from "./Components/Cart/Cart";
+import styled from "styled-components";
 
-class App extends React.Component {
+const Header = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 5vh;
+  align-items: center;
+`;
+
+const CartButton = styled.div`
+  width: 90px;
+  height: 90px;
+  position: fixed;
+  background-image: url("https://www.flaticon.com/svg/static/icons/svg/34/34585.svg");
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  background-size: 50%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 5px;
+  bottom: 20px;
+  right: 20px;
+  background-position: center;
+`;
+
+export class App extends React.Component {
   state = {
-    productsList: [
-      {
-        id: 1,
-        name: "Qualquer um",
-        value: 100,
-        imageUrl: '',
-      },
-      {
-        id: 2,
-        name: "Qualquer um",
-        value: 100,
-        imageUrl: "",
-      },
-      {
-        id: 3,
-        name: "Qualquer um",
-        value: 100,
-        imageUrl: "",
-      },
-      {
-        id: 4,
-        name: "Qualquer um",
-        value: 100,
-        imageUrl: "",
-      },
-      {
-        id: 5,
-        name: "Qualquer um",
-        value: 100,
-        imageUrl: "",
-      },
-      {
-        id: 6,
-        name: "Qualquer um",
-        value: 100,
-        imageUrl: "",
-      },
-      {
-        id: 7,
-        name: "Qualquer um",
-        value: 100,
-        imageUrl: "",
-      },
-      {
-        id: 8,
-        name: "Qualquer um",
-        value: 100,
-        imageUrl: "",
-      },
-    ],
+    section: "",
+    viewCart: false,
+    cartList: [],
+    cart: false,
   };
 
-  componentDidMount () {
-
+  productAddCart = (newProduct)=> {
+    let list = [...this.state.cartList];
+    let productShow = this.state.cartList.findIndex((product) => product.id === newProduct.id);
+    if (productShow > -1) {
+      list[productShow].quantidade++;
+    } else {
+      newProduct.quantidade=1;
+      list.push(newProduct);
+    }
+    this.setState({cartList: list})
   }
 
-  componentDidUpdate() {
+  receiveSection = (sectionPress) => {
+    this.setState({ section: sectionPress });
+    if (sectionPress === "cart") {
+      this.setState({ cart: true });
+    } else {
+      this.setState({ cart: false });
+    }
+  };
 
-  }
+  onClickCart = () => {
+    this.setState({ viewCart: !this.state.viewCart });
+  };
 
-  onChangeFilter () {
-  
-  }
-
-  render () {
+  render() {
+    if (this.state.viewCart) {
+      return (
+        <div>
+          <Header
+            state={this.state.section}
+            info={this.receiveSection}
+          ></Header>
+          <Cart list={this.state.cartList} />
+        </div>
+      );
+    }
     return (
       <div>
-        <Filter />
+        <Header state={this.state.section} info={this.receiveSection}>
+          <h1>LabECommerce</h1>
+        </Header>
+        <Filter></Filter>
+        <SectionProducts section={this.state.section} passProduct={this.productAddCart} />
+        <CartButton onClick={this.onClickCart} />
       </div>
-    )
+    );
   }
-
-
 }
 
 export default App;
