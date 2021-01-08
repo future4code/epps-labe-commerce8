@@ -4,13 +4,6 @@ import SectionProducts from "./Components/Card/SectionProducts";
 import Cart from "./Components/Cart/Cart";
 import styled from "styled-components";
 
-const Header = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 5vh;
-  align-items: center;
-`;
-
 const CartButton = styled.div`
   width: 90px;
   height: 90px;
@@ -80,10 +73,6 @@ export class App extends React.Component {
     if (this.state.viewCart) {
       return (
         <DivApp>
-          {/* <Header state={this.state.section} info={this.receiveSection}>
-            {" "}
-            <h1>LabECommerce</h1>{" "}
-          </Header> */}
           <Filter></Filter>
           <SectionProducts
             section={this.state.section}
@@ -97,10 +86,6 @@ export class App extends React.Component {
 
     return (
       <DivApp>
-        {/* <Header state={this.state.section} info={this.receiveSection}>
-          {" "}
-          <h1>LabECommerce</h1>{" "}
-        </Header> */}
         <Filter></Filter>
         <SectionProducts
           section={this.state.section}

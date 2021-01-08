@@ -90,7 +90,7 @@ export class SectionProduct extends React.Component {
       <div>
         <ProductsContainer>{list}</ProductsContainer>;
       </div>
-    )
+    );
   }
 }
 
