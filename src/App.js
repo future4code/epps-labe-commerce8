@@ -25,7 +25,10 @@ const CartButton = styled.div`
   background-position: center;
 `;
 
-const DivApp = styled.div``
+const DivApp = styled.div`
+  display:flex;
+  flex-direction: row;
+`;
 
 export class App extends React.Component {
   state = {
@@ -34,6 +37,7 @@ export class App extends React.Component {
     cartList: [],
   };
 
+  // Adicionar produto ao carrinho.
   productAddCart = (newProduct) => {
     let list = [...this.state.cartList];
     let productShow = this.state.cartList.findIndex(
@@ -48,14 +52,15 @@ export class App extends React.Component {
     this.setState({ cartList: list });
   };
 
+  // Remover produto do carrinho.
   deleteProduct = (id) => {
     let list = [...this.state.cartList];
-    let product = this.state.cartList.findIndex (
-      (product) => product.id === id);
-      list.splice(product, 1);
-      this.setState({cartList: list})  
-  }
+    let product = this.state.cartList.findIndex((product) => product.id === id);
+    list.splice(product, 1);
+    this.setState({ cartList: list });
+  };
 
+  // Para mostrar o carrinho.
   receiveSection = (sectionPress) => {
     this.setState({ section: sectionPress });
     if (sectionPress === "viewCart") {
@@ -65,29 +70,37 @@ export class App extends React.Component {
     }
   };
 
-  onClickCart = () => {
+  // Ao clicar no icone do carrinho.
+  onClickCart = (event) => {
     this.setState({ viewCart: !this.state.viewCart });
+    this.setState({ section: event.target.getAttribute("value") });
   };
 
   render() {
     if (this.state.viewCart) {
       return (
-        <div>
-          <Header
-            state={this.state.section}
-            info={this.receiveSection}
-          ></Header>
+        <DivApp>
+          {/* <Header state={this.state.section} info={this.receiveSection}>
+            {" "}
+            <h1>LabECommerce</h1>{" "}
+          </Header> */}
+          <Filter></Filter>
+          <SectionProducts
+            section={this.state.section}
+            passProduct={this.productAddCart}
+          />
+          <CartButton onClick={this.onClickCart} />
           <Cart list={this.state.cartList} delete={this.deleteProduct} />
-        </div>
+        </DivApp>
       );
     }
 
-    
     return (
       <DivApp>
-        <Header state={this.state.section} info={this.receiveSection}>
-          <h1>LabECommerce</h1>
-        </Header>
+        {/* <Header state={this.state.section} info={this.receiveSection}>
+          {" "}
+          <h1>LabECommerce</h1>{" "}
+        </Header> */}
         <Filter></Filter>
         <SectionProducts
           section={this.state.section}

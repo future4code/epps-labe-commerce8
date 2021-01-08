@@ -2,23 +2,29 @@ import React from "react";
 import styled from "styled-components";
 
 const BigContainer = styled.div`
-  height: 10vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  border: 2px solid black;
+  height: 90vh;
+  width: 20vw;
 `;
 
 const FilterContainer = styled.div`
+  margin-bottom: 1vh;
 `;
 
-const FilterSelect = styled.div`
-`
-    
+const FilterSelect = styled.div``;
 
 export class Filter extends React.Component {
   state = {
     minValue: "",
     maxValue: "",
     searchProduct: "",
+    order: "",
+  };
+
+  onChangeOrder = (event) => {
+    this.setState({ order: event.target.value });
   };
 
   onChangeMinValue = (event) => {
@@ -33,11 +39,30 @@ export class Filter extends React.Component {
     this.setState({ searchProduct: event.target.value });
   };
 
+  orderProducts = (a, b) => {
+    if (this.state.order === "precoCrescente") {
+      return a.value - b.value;
+    } else if (this.state.order === "precoDecrescente") {
+      return b.value - a.value;
+    } else {
+      return a.id - b.id;
+    }
+  };
+
+  filterName = (list) => {
+    list = list.filter((product) => {
+      if (product.name.includes(this.state.searchProduct)) {
+        return true;
+      }
+    });
+  };
+
   render() {
     return (
       <BigContainer>
+        <h2>Filtros:</h2>
         <FilterContainer>
-          <label>Valor Mínimo</label>
+          <label>Valor Mínimo:</label>
           <input
             type={"number"}
             value={this.state.minValue}
@@ -45,7 +70,7 @@ export class Filter extends React.Component {
           ></input>
         </FilterContainer>
         <FilterContainer>
-          <label>Valor Máximo</label>
+          <label>Valor Máximo:</label>
           <input
             type={"number"}
             value={this.state.maxValue}
@@ -53,7 +78,7 @@ export class Filter extends React.Component {
           ></input>
         </FilterContainer>
         <FilterContainer>
-          <label>Buscar Produto</label>
+          <label>Buscar Produto:</label>
           <input
             type={"text"}
             value={this.state.searchProduct}
@@ -62,14 +87,16 @@ export class Filter extends React.Component {
         </FilterContainer>
 
         <FilterSelect>
-          <select name="order">
-            <option>Preço Crescente</option>
-            <option>Preço Descrescente</option>
+          <select
+            name="order"
+            value={this.state.order}
+            onChange={this.onChangeOrder}
+          >
+            <option value="precoCrescente">Preço Crescente</option>
+            <option value="precoDecrescente">Preço Decrescente</option>
           </select>
         </FilterSelect>
       </BigContainer>
-        
-      
     );
   }
 }
