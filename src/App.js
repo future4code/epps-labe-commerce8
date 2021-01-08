@@ -25,60 +25,89 @@ const CartButton = styled.div`
   background-position: center;
 `;
 
+const DivApp = styled.div`
+  display:flex;
+  flex-direction: row;
+`;
+
 export class App extends React.Component {
   state = {
     section: "",
     viewCart: false,
     cartList: [],
-    cart: false,
   };
 
-  productAddCart = (newProduct)=> {
+  // Adicionar produto ao carrinho.
+  productAddCart = (newProduct) => {
     let list = [...this.state.cartList];
-    let productShow = this.state.cartList.findIndex((product) => product.id === newProduct.id);
+    let productShow = this.state.cartList.findIndex(
+      (product) => product.id === newProduct.id
+    );
     if (productShow > -1) {
-      list[productShow].quantidade++;
+      list[productShow].quantity++;
     } else {
-      newProduct.quantidade=1;
+      newProduct.quantity = 1;
       list.push(newProduct);
     }
-    this.setState({cartList: list})
-  }
+    this.setState({ cartList: list });
+  };
 
+  // Remover produto do carrinho.
+  deleteProduct = (id) => {
+    let list = [...this.state.cartList];
+    let product = this.state.cartList.findIndex((product) => product.id === id);
+    list.splice(product, 1);
+    this.setState({ cartList: list });
+  };
+
+  // Para mostrar o carrinho.
   receiveSection = (sectionPress) => {
     this.setState({ section: sectionPress });
-    if (sectionPress === "cart") {
-      this.setState({ cart: true });
+    if (sectionPress === "viewCart") {
+      this.setState({ viewCart: true });
     } else {
-      this.setState({ cart: false });
+      this.setState({ viewCart: false });
     }
   };
 
-  onClickCart = () => {
+  // Ao clicar no icone do carrinho.
+  onClickCart = (event) => {
     this.setState({ viewCart: !this.state.viewCart });
+    this.setState({ section: event.target.getAttribute("value") });
   };
 
   render() {
     if (this.state.viewCart) {
       return (
-        <div>
-          <Header
-            state={this.state.section}
-            info={this.receiveSection}
-          ></Header>
-          <Cart list={this.state.cartList} />
-        </div>
+        <DivApp>
+          {/* <Header state={this.state.section} info={this.receiveSection}>
+            {" "}
+            <h1>LabECommerce</h1>{" "}
+          </Header> */}
+          <Filter></Filter>
+          <SectionProducts
+            section={this.state.section}
+            passProduct={this.productAddCart}
+          />
+          <CartButton onClick={this.onClickCart} />
+          <Cart list={this.state.cartList} delete={this.deleteProduct} />
+        </DivApp>
       );
     }
+
     return (
-      <div>
-        <Header state={this.state.section} info={this.receiveSection}>
-          <h1>LabECommerce</h1>
-        </Header>
+      <DivApp>
+        {/* <Header state={this.state.section} info={this.receiveSection}>
+          {" "}
+          <h1>LabECommerce</h1>{" "}
+        </Header> */}
         <Filter></Filter>
-        <SectionProducts section={this.state.section} passProduct={this.productAddCart} />
+        <SectionProducts
+          section={this.state.section}
+          passProduct={this.productAddCart}
+        />
         <CartButton onClick={this.onClickCart} />
-      </div>
+      </DivApp>
     );
   }
 }
