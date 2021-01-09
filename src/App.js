@@ -1,5 +1,4 @@
 import React from "react";
-import Filter from "./Components/Filter/Filter";
 import SectionProducts from "./Components/Card/SectionProducts";
 import Cart from "./Components/Cart/Cart";
 import styled from "styled-components";
@@ -19,7 +18,7 @@ const CartButton = styled.div`
 `;
 
 const DivApp = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: row;
 `;
 
@@ -30,7 +29,7 @@ export class App extends React.Component {
     cartList: [],
   };
 
-  // Adicionar produto ao carrinho.
+  // Adiciona produto ao carrinho.
   productAddCart = (newProduct) => {
     let list = [...this.state.cartList];
     let productShow = this.state.cartList.findIndex(
@@ -45,7 +44,7 @@ export class App extends React.Component {
     this.setState({ cartList: list });
   };
 
-  // Remover produto do carrinho.
+  // Remove produto do carrinho.
   deleteProduct = (id) => {
     let list = [...this.state.cartList];
     let product = this.state.cartList.findIndex((product) => product.id === id);
@@ -73,7 +72,6 @@ export class App extends React.Component {
     if (this.state.viewCart) {
       return (
         <DivApp>
-          <Filter></Filter>
           <SectionProducts
             section={this.state.section}
             passProduct={this.productAddCart}
@@ -86,7 +84,6 @@ export class App extends React.Component {
 
     return (
       <DivApp>
-        <Filter></Filter>
         <SectionProducts
           section={this.state.section}
           passProduct={this.productAddCart}
