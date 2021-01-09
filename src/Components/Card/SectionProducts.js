@@ -114,6 +114,7 @@ export class SectionProduct extends React.Component {
     this.setState({ searchProduct: event.target.value });
   };
 
+  // Filtrar por valor:
   filterByValue = (list) => {
     let minimumValue = this.state.minValue;
     let maximumValue = this.state.maxValue;
@@ -130,6 +131,7 @@ export class SectionProduct extends React.Component {
     return list;
   };
 
+  // Ordernar os produtos:
   orderProducts = (a, b) => {
     if (this.state.order === "precoCrescente") {
       return a.value - b.value;
@@ -140,6 +142,7 @@ export class SectionProduct extends React.Component {
     }
   };
 
+  // FIltrar por nome:
   filterByName = (list) => {
     list = list.filter((product) => {
       if (

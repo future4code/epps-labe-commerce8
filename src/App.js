@@ -29,6 +29,7 @@ export class App extends React.Component {
     cartList: [],
   };
 
+  // Desafio:
   componentDidUpdate = () => {
     localStorage.setItem('viewCart', JSON.stringify(this.state.cartList))
   }
