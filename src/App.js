@@ -1,4 +1,5 @@
 import React from "react";
+import Filter from "./Components/Filter/Filter";
 import SectionProducts from "./Components/Card/SectionProducts";
 import Cart from "./Components/Cart/Cart";
 import styled from "styled-components";
@@ -18,7 +19,7 @@ const CartButton = styled.div`
 `;
 
 const DivApp = styled.div`
-  display: flex;
+  display:flex;
   flex-direction: row;
 `;
 
@@ -29,18 +30,7 @@ export class App extends React.Component {
     cartList: [],
   };
 
-  componentDidUpdate = () => {
-    localStorage.setItem('viewCart', JSON.stringify(this.state.cartList))
-  }
-
-  componentDidMount = () => {
-    const cartMount = JSON.parse(localStorage.getItem("viewCart"))
-    if (cartMount !== null) {
-      this.setState({cartList: cartMount})
-    }
-  }
-
-  // Adiciona produto ao carrinho.
+  // Adicionar produto ao carrinho.
   productAddCart = (newProduct) => {
     let list = [...this.state.cartList];
     let productShow = this.state.cartList.findIndex(
@@ -55,7 +45,7 @@ export class App extends React.Component {
     this.setState({ cartList: list });
   };
 
-  // Remove produto do carrinho.
+  // Remover produto do carrinho.
   deleteProduct = (id) => {
     let list = [...this.state.cartList];
     let product = this.state.cartList.findIndex((product) => product.id === id);
@@ -83,6 +73,7 @@ export class App extends React.Component {
     if (this.state.viewCart) {
       return (
         <DivApp>
+          <Filter></Filter>
           <SectionProducts
             section={this.state.section}
             passProduct={this.productAddCart}
@@ -95,6 +86,7 @@ export class App extends React.Component {
 
     return (
       <DivApp>
+        <Filter></Filter>
         <SectionProducts
           section={this.state.section}
           passProduct={this.productAddCart}
