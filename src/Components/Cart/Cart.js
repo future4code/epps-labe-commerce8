@@ -10,7 +10,7 @@ const CartContainer = styled.div`
 const CartFullContainer = styled.div`
   border: 2px solid black;
   width: 300px;
-`;
+`
 
 export class Cart extends React.Component {
   updateProducts = (list) => {
@@ -20,9 +20,7 @@ export class Cart extends React.Component {
           <p>{product.name}</p>
           <p>Quantidade:{product.quantity}</p>
           <p>R${product.value * product.quantity}</p>
-          <button onClick={() => this.props.delete(product.id)}>
-            Retirar produto do carrinho
-          </button>
+          <button onClick ={() => this.props.delete(product.id)}>Retirar produto do carrinho</button>
         </div>
       );
     });
@@ -34,7 +32,7 @@ export class Cart extends React.Component {
     for (let i = 0; i < list.length; i++) {
       value += list[i].value * list[i].quantity;
     }
-    return value;
+    return value
   };
 
   render() {
