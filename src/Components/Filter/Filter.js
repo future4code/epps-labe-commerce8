@@ -92,8 +92,10 @@ export class Filter extends React.Component {
             value={this.state.order}
             onChange={this.onChangeOrder}
           >
+
             <option value="precoCrescente">Preço Crescente</option>
             <option value="precoDecrescente">Preço Decrescente</option>
+
           </select>
         </FilterSelect>
       </BigContainer>
@@ -102,3 +104,4 @@ export class Filter extends React.Component {
 }
 
 export default Filter;
+
