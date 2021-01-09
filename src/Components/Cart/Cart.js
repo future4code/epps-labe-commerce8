@@ -3,13 +3,11 @@ import styled from "styled-components";
 
 const CartContainer = styled.div`
   padding: 10px;
-  display: grid;
   margin: 20px auto;
 `;
 
 const CartFullContainer = styled.div`
-  border: 2px solid black;
-  width: 300px;
+  background-color: rgb(12, 11, 56);
 `
 
 export class Cart extends React.Component {

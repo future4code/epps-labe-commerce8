@@ -8,6 +8,7 @@ const CartButton = styled.div`
   width: 90px;
   height: 90px;
   position: fixed;
+  background-color: #FFF;
   background-image: url("https://www.flaticon.com/svg/static/icons/svg/34/34585.svg");
   background-repeat: no-repeat;
   border-radius: 50%;
@@ -19,8 +20,11 @@ const CartButton = styled.div`
 `;
 
 const DivApp = styled.div`
-  display:flex;
-  flex-direction: row;
+  background-color: #ebeff3;
+  color: white;
+  display: grid;
+  grid-template-columns: 200px 1fr 250px;
+  padding: 10px;
 `;
 
 export class App extends React.Component {

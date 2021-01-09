@@ -2,15 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const BigContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 2px solid black;
-  height: 90vh;
-  width: 20vw;
+  background-color: rgb(20, 35, 100);
 `;
 
 const FilterContainer = styled.div`
-  margin-bottom: 1vh;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
 `;
 
 const FilterSelect = styled.div``;
@@ -60,8 +58,8 @@ export class Filter extends React.Component {
   render() {
     return (
       <BigContainer>
-        <h2>Filtros:</h2>
         <FilterContainer>
+        <h2>Filtros:</h2>
           <label>Valor Mínimo:</label>
           <input
             type={"number"}
@@ -85,17 +83,18 @@ export class Filter extends React.Component {
             onChange={this.onChangeSearchProduct}
           ></input>
         </FilterContainer>
-
-        <FilterSelect>
-          <select
-            name="order"
-            value={this.state.order}
-            onChange={this.onChangeOrder}
-          >
-            <option value="precoCrescente">Preço Crescente</option>
-            <option value="precoDecrescente">Preço Decrescente</option>
-          </select>
-        </FilterSelect>
+        <FilterContainer>
+            <FilterSelect>
+              <select
+                name="order"
+                value={this.state.order}
+                onChange={this.onChangeOrder}
+              >
+                <option value="precoCrescente">Preço Crescente</option>
+                <option value="precoDecrescente">Preço Decrescente</option>
+              </select>
+            </FilterSelect>
+        </FilterContainer>
       </BigContainer>
     );
   }
