@@ -1,7 +1,7 @@
 epps-labe-commerce8
 
 ### O que funciona
-- O funcionamento dos filtros ( Min, Max Ordenação )
+- O funcionamento dos filtros ( Min, Max e Ordenação )
 - A compra que é direcionada ao Carrinho de compras ( Quantidade, a Soma dos produtos)
 - A exclusão de cada produto
 
