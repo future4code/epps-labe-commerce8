@@ -1,43 +1,83 @@
-import React from "react";
-import styled from "styled-components";
-import Card from "./Card";
-import ImgOne from "../../Img/Img1.jpg";
-import ImgTwo from "../../Img/Img2.jpg";
-import ImgThree from "../../Img/Img3.jpg";
-import ImgFour from "../../Img/Img4.jpg";
-import ImgFive from "../../Img/Img5.jpg";
-import ImgSix from "../../Img/Img6.jpg";
-import ImgSeven from "../../Img/Img7.jpg";
-import ImgEight from "../../Img/Img8.jpg";
-
-const ProductsContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 10px;
-  height: 100%;
-  width: 100%;
-  border: 2px solid black;
-`;
-
-const BigContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 2px solid black;
-  height: 80vh;
-  width: 20vw;
-`;
-
-const FilterContainer = styled.div`
-  margin-bottom: 1vh;
-`;
-
-const FilterSelect = styled.div``;
+import React from "react"
+import styled from "styled-components"
+import Card from "./Card"
+import ImgOne from "../../Img/Img1.jpg"
+import ImgTwo from "../../Img/Img2.jpg"
+import ImgThree from "../../Img/Img3.jpg"
+import ImgFour from "../../Img/Img4.jpg"
+import ImgFive from "../../Img/Img5.jpg"
+import ImgSix from "../../Img/Img6.jpg"
+import ImgSeven from "../../Img/Img7.jpg"
+import ImgEight from "../../Img/Img8.jpg"
 
 const AppContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 200px 1fr;
   width: 100%;
-`;
+
+  @media (max-device-width: 650px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const BigContainer = styled.div`
+`
+
+const FilterContainer = styled.div`
+  margin-bottom: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  @media(min-width: 651px) {
+      grid-template-columns: repeat(1, 1fr);
+      margin: 10px;
+    }
+
+`
+
+const MainItemCard = styled.div`
+    background: #330024;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.1);
+    padding: 0px 15px 0px;
+    text-align: left;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 100%;
+
+    @media(min-width: 768px) and (max-width: 1020px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media(min-width: 436px) and (max-width: 767px){
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media(max-width: 435px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+`
+
+const TitleFilter = styled.h2`
+  background: #62006b;
+  color: white;
+  margin: 10px;
+  padding: 5px;
+`
+
+const Input = styled.input`
+  width: 96%;
+  outline: none;
+  border: 2px solid #62006b;
+  font-size: 16px;
+`
+
+const Select = styled.select`
+  border: 2px solid #62006b;
+  padding: 10px;
+  font-size: 16px;
+`
 
 const productsList = [
   {
@@ -154,8 +194,8 @@ export class SectionProduct extends React.Component {
   };
 
   cartProduct = (id) => {
-    const selectProduct = productsList.find((product) => product.id === id);
-    this.props.passProduct(selectProduct);
+    const SelectProduct = productsList.find((product) => product.id === id);
+    this.props.passProduct(SelectProduct);
   };
 
   updateProducts = (list) => {
@@ -183,46 +223,46 @@ export class SectionProduct extends React.Component {
     return (
       <AppContainer>
         <BigContainer>
-          <h2>Filtros:</h2>
+          <TitleFilter>Filtros:</TitleFilter>
           <FilterContainer>
-            <label>Valor Mínimo:</label>
-            <input
+            <p>Valor Mínimo:</p>
+            <Input
               type={"number"}
               value={this.state.minValue}
               onChange={this.onChangeMinValue}
-            ></input>
+            ></Input>
           </FilterContainer>
           <FilterContainer>
-            <label>Valor Máximo:</label>
-            <input
+            <p>Valor Máximo:</p>
+            <Input
               type={"number"}
               value={this.state.maxValue}
               onChange={this.onChangeMaxValue}
-            ></input>
+            ></Input>
           </FilterContainer>
           <FilterContainer>
-            <label>Buscar Produto:</label>
-            <input
+            <p>Buscar Produto:</p>
+            <Input
               type={"text"}
               value={this.state.searchProduct}
               onChange={this.onChangeSearchProduct}
-            ></input>
+            ></Input>
           </FilterContainer>
-
-          <FilterSelect>
-            <select
-              name="order"
-              value={this.state.order}
-              onChange={this.onChangeOrder}
-            >
-              <option value="precoCrescente">Preço Crescente</option>
-              <option value="precoDecrescente">Preço Decrescente</option>
-            </select>
-          </FilterSelect>
+          <FilterContainer>
+              <p>Ordenar por:</p>
+              <Select
+                name="order"
+                value={this.state.order}
+                onChange={this.onChangeOrder}
+              >
+                <option value="precoCrescente">Menor Preço</option>
+                <option value="precoDecrescente">Maior Preço</option>
+              </Select>
+          </FilterContainer>
         </BigContainer>
-        <ProductsContainer>{list}</ProductsContainer>
-      </AppContainer>
-    );
+        <MainItemCard>{list}</MainItemCard>
+       </AppContainer>
+    )
   }
 }
 
