@@ -7,7 +7,7 @@ epps-labe-commerce8
 
 ### O que não funciona
 - A responsividade do projeto quando é clicado no Carrinho de compras.
-- As imagens sendo responsividade de acordo com os tamanhos adequados.
+- As imagens sendo responsiva de acordo com os tamanhos das telas adequados.
 
 ### Link Surge 
 scintillating-cheese.surge.sh
