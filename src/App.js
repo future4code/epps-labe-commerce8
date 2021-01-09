@@ -29,6 +29,17 @@ export class App extends React.Component {
     cartList: [],
   };
 
+  componentDidUpdate = () => {
+    localStorage.setItem('viewCart', JSON.stringify(this.state.cartList))
+  }
+
+  componentDidMount = () => {
+    const cartMount = JSON.parse(localStorage.getItem("viewCart"))
+    if (cartMount !== null) {
+      this.setState({cartList: cartMount})
+    }
+  }
+
   // Adiciona produto ao carrinho.
   productAddCart = (newProduct) => {
     let list = [...this.state.cartList];
