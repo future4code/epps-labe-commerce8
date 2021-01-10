@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const MainProducts = styled.div`
   margin: 2px;
-  /* background: #fff; */
   margin-bottom: 20px;
 `
 
